@@ -1,0 +1,1 @@
+# dynamically-changing-resolution

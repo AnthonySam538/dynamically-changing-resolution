@@ -1,1 +1,15 @@
-# dynamically-changing-resolution
+# Dynamically Changing Resolution
+When the video's resolution is changing during playback! 😳😳😳
+## [Step-by-step](https://youtu.be/n1rBcszDmWg?t=43 "!!") guide on how to use this script
+1. Install Python by visiting https://www.python.org/downloads. By default, the checkbox for adding Python to PATH will be unticked, preventing you from running Python in the command line. **Make sure that checkbox is ticked** so you can actually run the script.
+2. Download ffmpeg by visiting https://www.gyan.dev/ffmpeg/builds. To elaborate, scroll down to "release builds" and download _ffmpeg-release-essentials.zip_. (Or _ffmpeg-release-essentials.7z_ if you'd prefer.)
+3. Unzip/Extract/Decompress ffmpeg-release-essentials.
+4. Locate the binary folder, titled "bin" for short, and move my script, _dynamic resolution.py_, in there, so that it's in the same folder with _ffmpeg.exe_.
+5. Open the "bin" folder (if you haven't done so yet), then, in the address bar, enter "cmd". This will open a Command Prompt with "bin" as the current working directory.
+6. Run my scipt in the Command Prompt by entering the command `python "dynamic resolution.py"`. (Note that any previously made video will be overwritten, without your confirmation. If you'd like your confirmation to be required, remove the " -y" flag in line 55 of my script.)
+7. (Optional) Ensure that the video works properly (i.e. video_size is changing) by entering the command `ffplay output.webm -loglevel debug`.
+## Restoring the sound
+If you did that last step, you may have noticed that there is no more audio, since your input video was separated into images before being put back together. The original audio can be restored after a couple more steps.
+1. With "bin" still as the Command Prompt's working dirctory, use ffmpeg to extract the audio from the input video by entering the command `ffmpeg -i "PATH TO VIDEO" -vn -acodec copy output-audio.aac`. For example, if my Command Prompt still has "bin" as its working dirctory, I can enter the command `ffmpeg -i "..\..\..\..\Videos\Reacting to Jake and Josh's Little Caesars ''The Batman'' Pizza Calzone Mukbang.mp4" -vn -acoded copy output-audio.aac`. (Pressing the Tab key to autocomplete the file name is extremely helpful; you should use it even if the filename is short to avoid any kind of typos. And if the wrong file was autocompleted, pressing the Tab key again will cycle to a different file, if applicable.) (Each ".." means, move up a folder. So in the previous command, I am moving up 4 folders so that I can get a video in my "Videos" folder.) (I got this command from here: https://stackoverflow.com/a/27413824/12594327)
+2. Now enter the command `ffmpeg -i output.webm -i output-audio.aac -c:v copy -map 0:v:0 -map 1:a:0 "output with restored sound.webm"`. (I got this command from here: https://superuser.com/a/1137613)
+3. (Optional) Again, feel free to ensure that the video works properly by now entering the command `ffplay "output with restored sound.webm" -loglevel debug`.
